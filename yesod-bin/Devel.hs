@@ -347,6 +347,7 @@ devel opts passThroughArgs = do
                 [ "build"
                 , "--fast"
                 , "--file-watch"
+                , "--color=always"
 
                 -- Indicate the component we want
                 , packageName ++ ":lib"
