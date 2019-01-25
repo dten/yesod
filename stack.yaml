@@ -13,3 +13,7 @@ packages:
 - ./yesod
 - ./yesod-eventsource
 - ./yesod-websockets
+
+extra-deps:
+- git: https://github.com/dten/hfsnotify 
+  commit: 36df6639953817f3a439b7ae547cc9ceb259e6e0
