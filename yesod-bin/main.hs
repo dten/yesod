@@ -88,7 +88,7 @@ main = do
                              , develPort    = develPort
                              , develTlsPort = develTlsPort
                              , proxyTimeout = proxyTimeout
-                             , useReverseProxy = not noReverseProxy
+                             , useReverseProxy = False
                              , develHost    = develHost
                              } develExtraArgs
     DevelSignal     -> develSignal

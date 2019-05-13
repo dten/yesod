@@ -331,7 +331,7 @@ devel opts passThroughArgs = do
         (runStackBuild appPortVar packageName (getAvailableFlags gpd))
 
         -- Run the app itself, restarting when a build succeeds
-        (runApp appPortVar changedVar develHsPath)
+        (runApp appPortVar changedVar develHsPath packageName)
   where
     -- say, but only when verbose is on
     sayV = when (verbose opts) . sayString
@@ -345,11 +345,10 @@ devel opts passThroughArgs = do
                        $ setStderr createSource
                        $ setDelegateCtlc True $ proc "stack" $
                 [ "build"
-                , "--fast"
                 , "--file-watch"
 
                 -- Indicate the component we want
-                , packageName ++ ":lib"
+                , packageName
 
                 -- signal the watcher that a build has succeeded
                 , "--exec", myPath ++ " devel-signal"
@@ -360,7 +359,7 @@ devel opts passThroughArgs = do
                     (\flagName -> [ "--flag", packageName ++ ":" ++ flagName])
                     (Set.toList $ Set.intersection
                         availableFlags
-                        (Set.fromList ["dev", "library-only"])) ++
+                        (Set.fromList ["dev"])) ++
 
                 -- Add the success hook
                 (case successHook opts of
@@ -410,8 +409,8 @@ devel opts passThroughArgs = do
         inner changedVar
 
     -- Each time the library builds successfully, run the application
-    runApp :: TVar Int -> TVar Bool -> String -> IO b
-    runApp appPortVar changedVar develHsPath = do
+    runApp :: TVar Int -> TVar Bool -> String -> String -> IO b
+    runApp appPortVar changedVar develHsPath packageName = do
         -- Wait for the first change, indicating that the library
         -- has been built
         atomically $ do
@@ -482,13 +481,13 @@ devel opts passThroughArgs = do
                     , "env"
                     , "PORT=" ++ show newPort
                     , "DISPLAY_PORT=" ++ show (develPort opts)
-                    , "runghc"
-                    , develHsPath
+                    , packageName
+                    , "config/settings.yml"
                     ]
                   | otherwise = setStdin closed $ setEnv env' $ proc "stack"
-                    [ "runghc"
-                    , "--"
-                    , develHsPath
+                    [ "exec"
+                    , packageName
+                    , "config/settings.yml"
                     ]
 
             sayV $ "Running child process: " ++ show procDef
