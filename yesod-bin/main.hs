@@ -89,7 +89,7 @@ main = do
                              , develPort    = develPort
                              , develTlsPort = develTlsPort
                              , proxyTimeout = proxyTimeout
-                             , useReverseProxy = not noReverseProxy
+                             , useReverseProxy = False
                              , develHost    = develHost
                              , cert         = cert
                              } develExtraArgs
