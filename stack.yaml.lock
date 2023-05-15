@@ -13,7 +13,7 @@ packages:
     hackage: attoparsec-aeson-2.1.0.0
 snapshots:
 - completed:
-    sha256: 694573e96dca34db5636edb1fe6c96bb233ca0f9fb96c1ead1671cdfa9bd73e9
-    size: 585603
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/3.yaml
-  original: lts-18.3
+    sha256: 0a8278a8c9f33fbdaa40167e035065a7ca8ed61d89fec21236b888c470dab3f0
+    size: 625218
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2023/5/8.yaml
+  original: nightly-2023-05-08

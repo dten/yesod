@@ -1,4 +1,4 @@
-resolver: lts-18.3
+resolver: nightly-2023-05-08
 packages:
 - ./yesod-core
 - ./yesod-static
