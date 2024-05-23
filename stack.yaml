@@ -1,4 +1,4 @@
-resolver: nightly-2023-05-08
+resolver: nightly-2024-03-08
 packages:
 - ./yesod-core
 - ./yesod-static
@@ -14,6 +14,3 @@ packages:
 - ./yesod
 - ./yesod-eventsource
 - ./yesod-websockets
-
-extra-deps:
-- attoparsec-aeson-2.1.0.0
