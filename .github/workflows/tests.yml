@@ -48,6 +48,16 @@ jobs:
 #          restore-keys: |
 #            ${{ runner.os }}-${{ matrix.resolver }}-
 
+      - name: Install stack if needed
+        shell: bash
+        run: |
+            set -ex
+            if [[ "${{ matrix.os }}" == "macos-latest" ]]
+            then
+                # macos-latest does not include Haskell tools as of 2024-05-06.
+              curl -sSL https://get.haskellstack.org/ | sh
+            fi
+
       - name: Build and run tests
         shell: bash
         run: |
